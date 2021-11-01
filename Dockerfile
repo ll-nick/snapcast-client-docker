@@ -14,4 +14,7 @@ RUN  dpkg -i snapclient_${snapcast_version}-1_armhf.deb \
   && apt-get -f install -y \
   && rm -rf /var/lib/apt/lists/*
 RUN /usr/bin/snapclient -v
+
+ENV TZ=Europe/Berlin
+
 ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapclient -h $HOST"]
