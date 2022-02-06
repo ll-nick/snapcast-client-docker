@@ -2,8 +2,9 @@ ARG BUILD_FROM=balena:raspbian
 
 FROM $BUILD_FROM
 
-ARG snapcast_version=0.25.0
+ARG snapcast_version=0.26.0
 ENV HOST snapserver
+ENV ID clientid
 
 RUN  apt-get update \
   && apt-get install -y wget ca-certificates \
@@ -17,4 +18,4 @@ RUN /usr/bin/snapclient -v
 
 ENV TZ=Europe/Berlin
 
-ENTRYPOINT ["/bin/bash","-c","/usr/bin/snapclient -h $HOST"]
+ENTRYPOINT /usr/bin/snapclient -h $HOST --hostID $ID
